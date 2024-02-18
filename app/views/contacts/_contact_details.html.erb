@@ -1,0 +1,13 @@
+<% if contacts.present? %>
+  <h2>Contact Details</h2>
+  <div class='searchedContactList'>
+    <% contacts.each do |contact| %>
+      <div class='contacts contact-<%= contact.id%>'>
+        <p>Name: <%= contact.name %></p>
+        <p>Number: <%= contact.number %></p>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <h3>No result found!</h3>
+<% end %>

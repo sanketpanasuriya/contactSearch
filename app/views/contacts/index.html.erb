@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contacts</h1>
+
+<div>
+  <%= form_with url: contact_details_contacts_path, remote: true do |form|%>
+      <%= form.text_field 'search[contents]', placeholder: 'Enter Name or Number', id: 'search-contents', list: 'contact-list', 'autocomplete': 'off' %>
+      <datalist id=contact-list>
+        <%= render 'searched_result', contacts: @contacts %>
+      </datalist>
+      <%= form.submit 'Search' %>
+  <% end %>
+</div>
+
+<div id='searched_result'><div>
+
+<script>
+  let callAjaxTimeout = null;
+  $(document).on('keyup', '#search-contents', function(){
+    data = {}
+    data[$(this).attr('name')] = $(this).val();
+    clearTimeout(callAjaxTimeout);
+    callAjaxTimeout = setTimeout(
+      function(){
+        $.ajax({
+          url: '/contacts/search_contacts',
+          type: 'POST',
+          dataType: 'script',
+          data: data
+        });
+      }, 800);
+  });
+</script>

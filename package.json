@@ -1,5 +1,7 @@
 {
   "name": "contact-list-SL",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.7.1"
+  }
 }
